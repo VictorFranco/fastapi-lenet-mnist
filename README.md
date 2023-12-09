@@ -11,3 +11,6 @@ A web application that uses LeNet 5 to recognize handwritten numbers.
 ## Architecture
 
 ![LeNet 5](https://i.imgur.com/TtGiXI2.png)
+
+## LICENSE
+[MIT](LICENSE "LICENSE")
