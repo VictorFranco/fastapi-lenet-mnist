@@ -12,7 +12,7 @@
             align-items: center;
             margin: 0;
             background-color: whitesmoke;
-            font-style: serif;
+            font-family: serif;
         }
         canvas {
             width: 512px;
@@ -74,13 +74,14 @@
         const sendImage = async () => {
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data
             const image = []
+            const apiServer = window.location.origin
             let a = 0, b = 0
             for(let i = 0; i < imageData.length; i+=4) {
                 if(imageData[i] == 255) a++
                 if(imageData[i] == 0) b++
                 image.push(imageData[i])
             }
-            const response = await fetch("http://localhost:8000/lenet", {
+            const response = await fetch(`${apiServer}/lenet`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({array:image})
