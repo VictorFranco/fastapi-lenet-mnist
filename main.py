@@ -11,13 +11,13 @@ class Item(BaseModel):
 
 app = FastAPI()
 
-@app.post("/convert")
-async def convert(item: Item):
+@app.post("/lenet")
+async def lenet(item: Item):
     array = item.array
     image = np.array(array, dtype=np.double)
     image = np.reshape(image, (1,1,32,32)).astype(np.float32)
-    modelo_onnx = onnx.load('cnn.onnx')
-    session = onnxruntime.InferenceSession(modelo_onnx.SerializeToString())
+    onnx_model = onnx.load('cnn.onnx')
+    session = onnxruntime.InferenceSession(onnx_model.SerializeToString())
     output = session.run(None, {'in': image})
     predictions = output[0][0].tolist()
     return {"predictions": predictions}

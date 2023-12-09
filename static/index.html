@@ -46,15 +46,15 @@
 <body>
     <canvas></canvas>
     <div class="buttons">
-        <button id="enviar">Enviar</button>
-        <button id="limpiar">Limpiar</button>
+        <button id="btnPredict">Predict</button>
+        <button id="btnClear">Clear</button>
     </div>
     <div id="predictions"></div>
     <script>
         const canvas = document.querySelector("canvas")
-        const predictions_div = document.querySelector("#predictions")
-        const enviar = document.querySelector("#enviar")
-        const limpiar = document.querySelector("#limpiar")
+        const divPredictions = document.querySelector("#predictions")
+        const btnPredict = document.querySelector("#btnPredict")
+        const btnClear = document.querySelector("#btnClear")
         canvas.width = 32
         canvas.height = 32
         const ctx = canvas.getContext("2d")
@@ -80,7 +80,7 @@
                 if(imageData[i] == 0) b++
                 image.push(imageData[i])
             }
-            const response = await fetch("http://localhost:8000/convert", {
+            const response = await fetch("http://localhost:8000/lenet", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({array:image})
@@ -89,17 +89,17 @@
             let content = ""
             for(const [index, prediction] of predictions.entries())
                 content += `${index}: ${(prediction*100).toFixed(2)}%<br>`
-            predictions_div.innerHTML = content
+            divPredictions.innerHTML = content
         }
         const clear = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
-            predictions_div.innerHTML = ""
+            divPredictions.innerHTML = ""
         }
         canvas.addEventListener("mousedown", e => {mouseDown = true;draw(e)})
         canvas.addEventListener("mouseup", () => mouseDown = false)
         canvas.addEventListener("mousemove", e => {if(mouseDown) draw(e)})
-        enviar.addEventListener("click", sendImage)
-        limpiar.addEventListener("click", clear)
+        btnPredict.addEventListener("click", sendImage)
+        btnClear.addEventListener("click", clear)
     </script>
 </body>
 </html>
