@@ -7,3 +7,7 @@
 A web application that uses LeNet 5 to recognize handwritten numbers.
 
 ![Home Page](https://i.imgur.com/WZq2TVa.png)
+
+## Architecture
+
+![LeNet 5](https://i.imgur.com/TtGiXI2.png)
