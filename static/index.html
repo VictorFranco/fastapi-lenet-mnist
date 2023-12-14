@@ -6,27 +6,43 @@
     <title>LeNet 5</title>
     <style>
         body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
             min-height: 100vh;
+            margin: 0;
+            background-color: whitesmoke;
+
+            font-family: serif;
+        }
+        p {
+            max-width: 1000px;
+            text-align: center;
+        }
+        main {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
-            margin: 0;
-            background-color: whitesmoke;
-            font-family: serif;
+
+            width: 100%;
+            flex-grow: 1;
         }
         canvas {
             width: 512px;
             height: 512px;
-            box-shadow: 0 0 0 1px;
             background-color: black;
+
+            box-shadow: 0 0 0 1px;
         }
         button {
             width: 100px;
             height: 50px;
-            font-size: 20px;
-            background-color: white;
-            box-shadow: 0 0 0 1px;
             border: none;
+            background-color: white;
+
+            font-size: 20px;
+            box-shadow: 0 0 0 1px;
             transition: all 0.5s;
         }
         .buttons {
@@ -44,12 +60,18 @@
     </style>
 </head>
 <body>
-    <canvas></canvas>
-    <div class="buttons">
-        <button id="btnPredict">Predict</button>
-        <button id="btnClear">Clear</button>
-    </div>
-    <div id="predictions"></div>
+    <h1>LeNet 5</h1>
+    <p>
+        This web application uses LeNet (Convolutional Neural Network) to recognize handwritten numbers. In order to draw a number inside the black square, press and drag the mouse.
+    </p>
+    <main>
+        <canvas></canvas>
+        <div class="buttons">
+            <button id="btnPredict">Predict</button>
+            <button id="btnClear">Clear</button>
+        </div>
+        <div id="predictions"></div>
+    </main>
     <script>
         const canvas = document.querySelector("canvas")
         const divPredictions = document.querySelector("#predictions")
